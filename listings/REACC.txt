@@ -1,0 +1,345 @@
+1→S:1→O
+ClrText
+Locate 1,1,"REACC"
+Locate 3,2,"SEGUIR GUARDADAS¹"
+Locate 3,3,"NUEVA (BORRA TODO)²"
+While O=1
+Locate 1,2," ":Locate 1,3," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=28:Then S–1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then 2→S:IfEnd
+If S>2:Then 1→S:IfEnd
+If W=31:Then 0→O:IfEnd
+If W=72:Then 1→S:0→O:IfEnd
+If W=62:Then 2→S:0→O:IfEnd
+If W=71:Then 1→S:0→O:IfEnd
+If W=47:Then 1→S:0→O:IfEnd
+WhileEnd
+S→B
+If B=2:Then 0→B:IfEnd
+0→F:0→G:0→H:0→I:0→J:0→K:0→E
+If B=0:Then
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 11
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 12
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 13
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 14
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 15
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 16
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 17
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 18
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 19
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 20
+{0}→List 21
+IfEnd
+If Abs (B)>0:Then
+List 21[1]→E
+If E>0:Then
+For 1→N To E
+List 12[N]→X:List 13[N]→Y:List 14[N]→Z
+List 15[N]→U:List 16[N]→V:List 17[N]→L
+List 18[N]→P:List 19[N]→Q:List 20[N]→R
+F+U→F:G+V→G:H+L→H
+I+Y×L–Z×V+P→I
+J+Z×U–X×L+Q→J
+K+X×V–Y×U+R→K
+Next
+IfEnd
+IfEnd
+While 1=1
+1→S:1→O
+ClrText
+Locate 1,1,"REACC  CARGAS":Locate 15,1,E
+Locate 3,2,"AGREGAR CARGAS¹"
+Locate 3,3,"LISTAR CARGAS²"
+Locate 3,4,"REACCIONES³"
+Locate 3,5,"CORTE EN BASE⁴"
+Locate 3,6,"BORRAR TODO⁵"
+Locate 3,7,"SALIR⁰"
+While O=1
+Locate 1,2," ":Locate 1,3," ":Locate 1,4," ":Locate 1,5," ":Locate 1,6," ":Locate 1,7," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=28:Then S–1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then 6→S:IfEnd
+If S>6:Then 1→S:IfEnd
+If W=31:Then 0→O:IfEnd
+If W=72:Then 1→S:0→O:IfEnd
+If W=62:Then 2→S:0→O:IfEnd
+If W=52:Then 3→S:0→O:IfEnd
+If W=73:Then 4→S:0→O:IfEnd
+If W=63:Then 5→S:0→O:IfEnd
+If W=71:Then 6→S:0→O:IfEnd
+If W=47:Then 6→S:0→O:IfEnd
+WhileEnd
+S→B
+If S=6:Then 0→B:IfEnd
+If B=0:Then Stop:IfEnd
+If B=5:Then
+1→S:1→O
+ClrText
+Locate 1,1,"BORRAR TODO?"
+Locate 3,2,"NO¹"
+Locate 3,3,"SI, BORRAR TODO²"
+While O=1
+Locate 1,2," ":Locate 1,3," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=28:Then S–1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then 2→S:IfEnd
+If S>2:Then 1→S:IfEnd
+If W=31:Then 0→O:IfEnd
+If W=72:Then 1→S:0→O:IfEnd
+If W=62:Then 2→S:0→O:IfEnd
+If W=71:Then 1→S:0→O:IfEnd
+If W=47:Then 1→S:0→O:IfEnd
+WhileEnd
+S→N
+If N=2:Then 0→F:0→G:0→H:0→I:0→J:0→K:0→E:0→List 21[1]:IfEnd
+IfEnd
+If B=3:Then
+ClrText
+Locate 1,1,"REACCIONES EN A"
+Locate 1,2,"FX":Locate 4,2,–F
+Locate 1,3,"FY":Locate 4,3,–G
+Locate 1,4,"FZ":Locate 4,4,–H
+Locate 12,2,"MX":Locate 14,2,–I
+Locate 12,3,"MY":Locate 14,3,–J
+Locate 12,4,"MZ":Locate 14,4,–K
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If B=4:Then
+ClrText
+Locate 1,1,"CORTE EN BASE (PILAR)"
+Locate 1,2,"N":Locate 5,2,H
+Locate 1,3,"QX":Locate 5,3,–G
+Locate 1,4,"QY":Locate 5,4,–F
+Locate 1,5,"MX":Locate 5,5,–J
+Locate 1,6,"MY":Locate 5,6,–I
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If B=2:Then
+If E=0:Then
+ClrText
+Locate 1,1,"NO HAY CARGAS"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If E>0:Then
+1→W
+While W>0
+ClrText
+Locate 1,1,"N T  X     Y     Z"
+2→R
+For 1→C To E
+List 11[C]→T
+Locate 1,R,C
+If T=1:Then Locate 3,R,"P":IfEnd
+If T=2:Then Locate 3,R,"D":IfEnd
+If T=3:Then Locate 3,R,"M":IfEnd
+If T<3:Then
+Locate 5,R,List 12[C]:Locate 11,R,List 13[C]:Locate 17,R,List 14[C]
+Locate 3,R+1,"F"
+Locate 5,R+1,List 15[C]:Locate 11,R+1,List 16[C]:Locate 17,R+1,List 17[C]
+IfEnd
+If T=3:Then
+Locate 3,R+1,"M"
+Locate 5,R+1,List 18[C]:Locate 11,R+1,List 19[C]:Locate 17,R+1,List 20[C]
+IfEnd
+R+2→R
+If R>7:Then
+If C<E:Then
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+ClrText
+Locate 1,1,"N T  X     Y     Z"
+2→R
+IfEnd
+IfEnd
+Next
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+1→S:1→O
+ClrText
+Locate 1,1,"CARGAS"
+Locate 3,2,"VOLVER AL MENU¹"
+Locate 3,3,"BORRAR UNA CARGA²"
+While O=1
+Locate 1,2," ":Locate 1,3," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=28:Then S–1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then 2→S:IfEnd
+If S>2:Then 1→S:IfEnd
+If W=31:Then 0→O:IfEnd
+If W=72:Then 1→S:0→O:IfEnd
+If W=62:Then 2→S:0→O:IfEnd
+If W=71:Then 1→S:0→O:IfEnd
+If W=47:Then 1→S:0→O:IfEnd
+WhileEnd
+S→N
+0→W
+If N=2:Then
+ClrText
+"CARGA N A BORRAR"?→W
+IfEnd
+If W>0:Then
+If W>E:Then E→W:IfEnd
+If W<E:Then
+For W→C To E–1
+List 11[C+1]→List 11[C]:List 12[C+1]→List 12[C]:List 13[C+1]→List 13[C]:List 14[C+1]→List 14[C]:List 15[C+1]→List 15[C]
+List 16[C+1]→List 16[C]:List 17[C+1]→List 17[C]:List 18[C+1]→List 18[C]:List 19[C+1]→List 19[C]:List 20[C+1]→List 20[C]
+Next
+IfEnd
+E–1→E:E→List 21[1]
+0→F:0→G:0→H:0→I:0→J:0→K
+If E>0:Then
+For 1→N To E
+List 12[N]→X:List 13[N]→Y:List 14[N]→Z
+List 15[N]→U:List 16[N]→V:List 17[N]→L
+List 18[N]→P:List 19[N]→Q:List 20[N]→R
+F+U→F:G+V→G:H+L→H
+I+Y×L–Z×V+P→I
+J+Z×U–X×L+Q→J
+K+X×V–Y×U+R→K
+Next
+IfEnd
+If E=0:Then 0→W:IfEnd
+IfEnd
+WhileEnd
+IfEnd
+IfEnd
+If B=1:Then
+20–E→M
+If M=0:Then
+ClrText
+Locate 1,1,"YA HAY 20 CARGAS"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If M>0:Then
+ClrText
+Locate 1,1,"AGREGAR CARGAS"
+"CARGAS A AGREGAR"?→N
+If N>M:Then M→N:IfEnd
+For 1→C To N
+0→P:0→Q:0→R:0→U:0→V:0→W:0→X:0→Y:0→Z:1→L
+1→S:1→D
+ClrText
+Locate 1,1,"CARGA":Locate 7,1,E+1
+Locate 3,2,"PUNTUAL¹"
+Locate 3,3,"DISTRIBUIDA²"
+Locate 3,4,"MOMENTO³"
+While D=1
+Locate 1,2," ":Locate 1,3," ":Locate 1,4," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→A
+While A=0
+Getkey→A
+WhileEnd
+If A=28:Then S–1→S:IfEnd
+If A=37:Then S+1→S:IfEnd
+If S<1:Then 3→S:IfEnd
+If S>3:Then 1→S:IfEnd
+If A=31:Then 0→D:IfEnd
+If A=72:Then 1→S:0→D:IfEnd
+If A=62:Then 2→S:0→D:IfEnd
+If A=52:Then 3→S:0→D:IfEnd
+WhileEnd
+S→T
+ClrText
+Locate 1,1,"CARGA":Locate 7,1,E+1
+If T=1
+Then "X"?→X:"Y"?→Y:"Z"?→Z
+"FX"?→U:"FY"?→V:"FZ"?→W
+IfEnd
+If T=2
+Then "X INICIO"?→X:"X FIN"?→A
+"Y INICIO"?→Y:"Y FIN"?→B
+"Z INICIO"?→Z:"Z FIN"?→D
+"QX KG/M"?→U:"QY KG/M"?→V:"QZ KG/M"?→W
+A–X→M:B–Y→O:D–Z→S
+√(M×M+O×O+S×S)→L
+(X+A)÷2→X:(Y+B)÷2→Y:(Z+D)÷2→Z
+IfEnd
+If T=3
+Then "MX"?→P:"MY"?→Q:"MZ"?→R
+IfEnd
+U×L→U:V×L→V:W×L→W
+ClrText
+Locate 1,1,"CARGA":Locate 7,1,E+1
+If T<3:Then
+Locate 1,2,"X":Locate 3,2,X
+Locate 1,3,"Y":Locate 3,3,Y
+Locate 1,4,"Z":Locate 3,4,Z
+Locate 11,2,"FX":Locate 14,2,U
+Locate 11,3,"FY":Locate 14,3,V
+Locate 11,4,"FZ":Locate 14,4,W
+IfEnd
+If T=2:Then Locate 1,5,"L":Locate 3,5,L:IfEnd
+If T=3:Then
+Locate 1,2,"MX":Locate 4,2,P
+Locate 1,3,"MY":Locate 4,3,Q
+Locate 1,4,"MZ":Locate 4,4,R
+IfEnd
+1→S:1→D
+Locate 3,6,"OK, AGREGAR¹"
+Locate 3,7,"REPETIR²"
+While D=1
+Locate 1,6," ":Locate 1,7," "
+Locate 1,S+5,">"
+While Getkey>0:WhileEnd
+0→A
+While A=0
+Getkey→A
+WhileEnd
+If A=28:Then S–1→S:IfEnd
+If A=37:Then S+1→S:IfEnd
+If S<1:Then 2→S:IfEnd
+If S>2:Then 1→S:IfEnd
+If A=31:Then 0→D:IfEnd
+If A=72:Then 1→S:0→D:IfEnd
+If A=62:Then 2→S:0→D:IfEnd
+If A=71:Then 2→S:0→D:IfEnd
+If A=47:Then 2→S:0→D:IfEnd
+WhileEnd
+S→O
+If O=2:Then 0→O:IfEnd
+If O=0:Then C–1→C:IfEnd
+If Abs (O)>0:Then
+F+U→F:G+V→G:H+W→H
+I+Y×W–Z×V+P→I
+J+Z×U–X×W+Q→J
+K+X×V–Y×U+R→K
+T→List 11[E+1]:X→List 12[E+1]:Y→List 13[E+1]:Z→List 14[E+1]
+U→List 15[E+1]:V→List 16[E+1]:W→List 17[E+1]
+P→List 18[E+1]:Q→List 19[E+1]:R→List 20[E+1]
+E+1→E:E→List 21[1]
+IfEnd
+Next
+IfEnd
+IfEnd
+WhileEnd

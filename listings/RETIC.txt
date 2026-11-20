@@ -1,0 +1,1392 @@
+{0,0,0,0,0,0}→List 1
+{0,0,0,0,0,0}→List 2
+{0,0,0,0,0,0,0,0,0}→List 3
+{0,0,0,0,0,0,0,0,0}→List 4
+{0,0,0,0,0,0}→List 5
+{0,0,0,0,0,0}→List 6
+{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 9
+While 1=1
+1→R:1→Y
+ClrText
+Locate 3,1,"NUDOS¹"
+Locate 3,2,"BARRAS²"
+Locate 3,3,"APOYOS³"
+Locate 3,4,"AGREGAR CARGAS⁴"
+Locate 3,5,"VER ESTRUCTURA⁵"
+Locate 3,6,"BORRAR CARGAS⁶"
+Locate 3,7,"RESOLVER⁷"
+While Y=1
+Locate 1,1," ":Locate 1,2," ":Locate 1,3," ":Locate 1,4," ":Locate 1,5," ":Locate 1,6," ":Locate 1,7," "
+Locate 1,R+0,">"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=28:Then R–1→R:IfEnd
+If W=37:Then R+1→R:IfEnd
+If R<1:Then 7→R:IfEnd
+If R>7:Then 1→R:IfEnd
+If W=31:Then 0→Y:IfEnd
+If W=72:Then 1→R:0→Y:IfEnd
+If W=62:Then 2→R:0→Y:IfEnd
+If W=52:Then 3→R:0→Y:IfEnd
+If W=73:Then 4→R:0→Y:IfEnd
+If W=63:Then 5→R:0→Y:IfEnd
+If W=53:Then 6→R:0→Y:IfEnd
+If W=74:Then 7→R:0→Y:IfEnd
+If W=71:Then 0→R:0→Y:IfEnd
+If W=47:Then 0→R:0→Y:IfEnd
+WhileEnd
+R→O
+O→List 9[19]
+If List 9[19]=0:Then Stop:IfEnd
+If List 9[19]=6:Then
+1→S:1→Z
+ClrText
+Locate 1,1,"BORRAR CARGAS?"
+Locate 3,2,"NO¹"
+Locate 3,3,"SI, BORRAR CARGAS²"
+While Z=1
+Locate 1,2," ":Locate 1,3," "
+Locate 1,S+1,">"
+While Getkey>0:WhileEnd
+0→M
+While M=0
+Getkey→M
+WhileEnd
+If M=28:Then S–1→S:IfEnd
+If M=37:Then S+1→S:IfEnd
+If S<1:Then 2→S:IfEnd
+If S>2:Then 1→S:IfEnd
+If M=31:Then 0→Z:IfEnd
+If M=72:Then 1→S:0→Z:IfEnd
+If M=62:Then 2→S:0→Z:IfEnd
+If M=71:Then 1→S:0→Z:IfEnd
+If M=47:Then 1→S:0→Z:IfEnd
+WhileEnd
+S→X
+If X=2:Then
+{0,0,0,0,0,0}→List 5
+{0,0,0,0,0,0}→List 6
+IfEnd
+IfEnd
+If List 9[19]=5:Then
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+Text 51,1,"ESTRUCTURA"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If List 9[19]=3:Then
+If List 9[1]=0:Then
+ClrText
+Locate 1,1,"PRIMERO LOS NUDOS"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If List 9[1]>0:Then
+0→List 9[10]
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"APOYO ARTICULADO"
+Text 57,1,"ELEGI EL NUDO"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+If S>0:Then S→List 9[2]:IfEnd
+List 9[2]→List 9[10]
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"RODILLO"
+Text 57,1,"ELEGI EL NUDO"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+If S>0:Then S→List 9[3]:IfEnd
+0→List 9[10]
+If List 9[3]>0:Then
+1→N:1→T
+ClrText
+Locate 1,1,"REACCION DEL RODILLO"
+Locate 3,2,"VERTICAL¹"
+Locate 3,3,"HORIZONTAL²"
+While T=1
+Locate 1,2," ":Locate 1,3," "
+Locate 1,N+1,">"
+While Getkey>0:WhileEnd
+0→M
+While M=0
+Getkey→M
+WhileEnd
+If M=28:Then N–1→N:IfEnd
+If M=37:Then N+1→N:IfEnd
+If N<1:Then 2→N:IfEnd
+If N>2:Then 1→N:IfEnd
+If M=31:Then 0→T:IfEnd
+If M=72:Then 1→N:0→T:IfEnd
+If M=62:Then 2→N:0→T:IfEnd
+If M=71:Then 1→N:0→T:IfEnd
+If M=47:Then 1→N:0→T:IfEnd
+WhileEnd
+N→D
+D→List 9[4]
+IfEnd
+IfEnd
+IfEnd
+If List 9[19]=1:Then
+ClrText
+"N NUDOS (3 A 6)"?→R
+If R<3:Then 3→R:IfEnd
+If R>6:Then 6→R:IfEnd
+R→List 9[1]
+For 1→G To R
+ClrText
+Locate 1,1,"NUDO":Locate 6,1,G:Locate 9,1,"DE":Locate 12,1,List 9[1]
+Locate 1,2,"X: HORIZONTAL (M)"
+Locate 1,3,"Y: VERTICAL (M)"
+Locate 1,4,"ORIGEN: UN PUNTO FIJO"
+Locate 1,5,"EJ: APOYO IZQ = 0,0"
+"X HORIZONTAL (M)"?→U:U→List 1[G]
+"Y VERTICAL (M)"?→V:V→List 2[G]
+Next
+1→X
+While X=1
+1→S:1→Y
+1→List 9[20]
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"EXE: CORREGIR NUDO"
+Text 57,1,"EXIT: LISTO"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If List 9[20]=1:Then 0→List 9[20]:If W=31:Then 0→W:IfEnd:IfEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+If S=0:Then 0→X:IfEnd
+If S>0:Then
+S→G
+ClrText
+Locate 1,1,"NUDO":Locate 6,1,G:Locate 9,1,"DE":Locate 12,1,List 9[1]
+Locate 1,2,"X: HORIZONTAL (M)"
+Locate 1,3,"Y: VERTICAL (M)"
+Locate 1,4,"ORIGEN: UN PUNTO FIJO"
+Locate 1,5,"EJ: APOYO IZQ = 0,0"
+"X HORIZONTAL (M)"?→U:U→List 1[G]
+"Y VERTICAL (M)"?→V:V→List 2[G]
+IfEnd
+WhileEnd
+IfEnd
+If List 9[19]=2:Then
+If List 9[1]=0:Then
+ClrText
+Locate 1,1,"PRIMERO LOS NUDOS"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If List 9[1]>0:Then
+2×List 9[1]–3→R
+1→List 9[12]
+1→X
+For 1→G To R
+If X=1:Then
+0→List 9[10]:0→List 3[G]:0→List 4[G]
+1→V
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"BARRA":Text 51,24,G:Text 51,32,"DE":Text 51,44,R
+Text 57,1,"NUDO 1: NRO O FLECHAS"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+If S=0:Then 0→V:IfEnd
+If V=1:Then
+S→List 3[G]:S→List 9[10]
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"BARRA":Text 51,24,G:Text 51,32,"DE":Text 51,44,R
+Text 57,1,"NUDO 2: NRO O FLECHAS"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+0→List 9[10]
+If S=0:Then 0→V:0→List 3[G]:IfEnd
+If V=1:Then S→List 4[G]:IfEnd
+IfEnd
+If V=0:Then 0→X:IfEnd
+IfEnd
+Next
+1→X
+While X=1
+1→S:1→Y
+While Y=1
+1→List 9[12]
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 3[S]→J:List 4[S]→K
+If J>0:Then
+If K>0:Then
+(List 1[J]+List 1[K])÷2→L:(List 2[J]+List 2[K])÷2→M:List 9[11]×4→T
+F-Line L–T,M–T,L+T,M–T:F-Line L+T,M–T,L+T,M+T:F-Line L+T,M+T,L–T,M+T:F-Line L–T,M+T,L–T,M–T
+IfEnd
+IfEnd
+Text 51,1,"EXE: CORREGIR BARRA"
+Text 57,1,"EXIT: LISTO"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then 2×List 9[1]–3→S:IfEnd
+If S>2×List 9[1]–3:Then 1→S:IfEnd
+If W=72:Then If 2×List 9[1]–3>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If 2×List 9[1]–3>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If 2×List 9[1]–3>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If 2×List 9[1]–3>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If 2×List 9[1]–3>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If 2×List 9[1]–3>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If 2×List 9[1]–3>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If 2×List 9[1]–3>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If 2×List 9[1]–3>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then 0→Y:IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+0→List 9[12]
+If S=0:Then 0→X:IfEnd
+If S>0:Then
+S→G
+1→List 9[12]
+0→List 9[10]:0→List 3[G]:0→List 4[G]
+1→V
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"BARRA":Text 51,24,G:Text 51,32,"DE":Text 51,44,R
+Text 57,1,"NUDO 1: NRO O FLECHAS"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+If S=0:Then 0→V:IfEnd
+If V=1:Then
+S→List 3[G]:S→List 9[10]
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"BARRA":Text 51,24,G:Text 51,32,"DE":Text 51,44,R
+Text 57,1,"NUDO 2: NRO O FLECHAS"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+0→List 9[10]
+If S=0:Then 0→V:0→List 3[G]:IfEnd
+If V=1:Then S→List 4[G]:IfEnd
+IfEnd
+IfEnd
+WhileEnd
+0→List 9[12]
+IfEnd
+IfEnd
+If List 9[19]=4:Then
+If List 9[1]=0:Then
+ClrText
+Locate 1,1,"PRIMERO LOS NUDOS"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If List 9[1]>0:Then
+ClrText
+1→G:1→List 9[18]
+While List 9[18]=1
+1→S:1→Y
+While Y=1
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+List 1[S]→J:List 2[S]→K:List 9[11]×5→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+Text 51,1,"CARGA":Text 51,24,G
+Text 57,1,"NRO O FLECHAS EXIT=LISTO"
+While Getkey>0:WhileEnd
+0→W
+While W=0
+Getkey→W
+WhileEnd
+If W=38:Then S–1→S:IfEnd
+If W=28:Then S–1→S:IfEnd
+If W=27:Then S+1→S:IfEnd
+If W=37:Then S+1→S:IfEnd
+If S<1:Then List 9[1]→S:IfEnd
+If S>List 9[1]:Then 1→S:IfEnd
+If W=72:Then If List 9[1]>0:Then 1→S:31→W:IfEnd:IfEnd
+If W=62:Then If List 9[1]>1:Then 2→S:31→W:IfEnd:IfEnd
+If W=52:Then If List 9[1]>2:Then 3→S:31→W:IfEnd:IfEnd
+If W=73:Then If List 9[1]>3:Then 4→S:31→W:IfEnd:IfEnd
+If W=63:Then If List 9[1]>4:Then 5→S:31→W:IfEnd:IfEnd
+If W=53:Then If List 9[1]>5:Then 6→S:31→W:IfEnd:IfEnd
+If W=74:Then If List 9[1]>6:Then 7→S:31→W:IfEnd:IfEnd
+If W=64:Then If List 9[1]>7:Then 8→S:31→W:IfEnd:IfEnd
+If W=54:Then If List 9[1]>8:Then 9→S:31→W:IfEnd:IfEnd
+If W=31:Then
+1→Z:If S=List 9[10]:Then 0→Z:IfEnd
+If Z=1:Then 0→Y:IfEnd
+IfEnd
+If W=47:Then 0→S:0→Y:IfEnd
+WhileEnd
+S→U
+If U=0:Then 0→List 9[18]:IfEnd
+If U>0:Then
+ClrText
+Locate 1,1,"NUDO":Locate 6,1,U
+"FX KG (HACIA DER)"?→V
+"FY KG (HACIA ARRIBA)"?→X
+ClrText
+Locate 1,1,"NUDO":Locate 6,1,U
+Locate 1,2,"FX":Locate 4,2,V
+Locate 1,3,"FY":Locate 4,3,X
+1→N:1→T
+Locate 3,6,"OK, AGREGAR¹"
+Locate 3,7,"REPETIR²"
+While T=1
+Locate 1,6," ":Locate 1,7," "
+Locate 1,N+5,">"
+While Getkey>0:WhileEnd
+0→M
+While M=0
+Getkey→M
+WhileEnd
+If M=28:Then N–1→N:IfEnd
+If M=37:Then N+1→N:IfEnd
+If N<1:Then 2→N:IfEnd
+If N>2:Then 1→N:IfEnd
+If M=31:Then 0→T:IfEnd
+If M=72:Then 1→N:0→T:IfEnd
+If M=62:Then 2→N:0→T:IfEnd
+If M=71:Then 2→N:0→T:IfEnd
+If M=47:Then 2→N:0→T:IfEnd
+WhileEnd
+N→Z
+If Z=2:Then 0→Z:IfEnd
+If Abs (Z)>0:Then
+List 5[U]+V→List 5[U]
+List 6[U]+X→List 6[U]
+G+1→G
+IfEnd
+IfEnd
+WhileEnd
+List 9[1]→N
+999999→A:–999999→B:999999→C:–999999→D
+For 1→I To N
+If List 1[I]<A:Then List 1[I]→A:IfEnd
+If List 1[I]>B:Then List 1[I]→B:IfEnd
+If List 2[I]<C:Then List 2[I]→C:IfEnd
+If List 2[I]>D:Then List 2[I]→D:IfEnd
+Next
+(B–A)÷112→E:(D–C)÷44→F
+If F>E:Then F→E:IfEnd
+If E<0.0001:Then 0.05→E:IfEnd
+(A+B)÷2–63×E→A
+D+6×E→C
+E→List 9[11]
+Cls
+ViewWindow A,A+126×E,1,C–62×E,C,1
+For 1→I To 2×N–3
+List 3[I]→J:List 4[I]→K
+If J>0:Then
+If K>0:Then
+F-Line List 1[J],List 2[J],List 1[K],List 2[K]
+If List 9[12]=1:Then
+Intg ((C–(List 2[J]+List 2[K])÷2)÷E)–3→L:Intg (((List 1[J]+List 1[K])÷2–A)÷E)+2→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+IfEnd
+IfEnd
+IfEnd
+Next
+For 1→I To N
+List 1[I]→J:List 2[I]→K
+F-Line J–E,K–E,J+E,K–E:F-Line J+E,K–E,J+E,K+E:F-Line J+E,K+E,J–E,K+E:F-Line J–E,K+E,J–E,K–E
+Intg ((C–K)÷E)–8→L:Intg ((J–A)÷E)+3→M
+If L<1:Then 1→L:IfEnd
+Text L,M,I
+Next
+List 9[2]→P:List 9[3]→Q:List 9[4]→H
+If P>0:Then
+List 1[P]→J:List 2[P]→K:4×E→L
+F-Line J,K,J–L,K–1.7×L:F-Line J,K,J+L,K–1.7×L:F-Line J–L,K–1.7×L,J+L,K–1.7×L
+IfEnd
+If Q>0:Then
+List 1[Q]→J:List 2[Q]→K:3×E→L
+If H=1:Then Circle J,K–L,L:F-Line J–2×L,K–2×L,J+2×L,K–2×L:IfEnd
+If H=2:Then Circle J–L,K,L:F-Line J–2×L,K–2×L,J–2×L,K+2×L:IfEnd
+IfEnd
+For 1→I To N
+If Abs (List 5[I])+Abs (List 6[I])>0:Then
+List 1[I]→J:List 2[I]→K
+√(List 5[I]×List 5[I]+List 6[I]×List 6[I])→L
+List 5[I]÷L→M:List 6[I]÷L→O
+14×E→T
+F-Line J–M×T,K–O×T,J,K
+F-Line J,K,J–0.3×T×M–0.15×T×O,K–0.3×T×O+0.15×T×M
+F-Line J,K,J–0.3×T×M+0.15×T×O,K–0.3×T×O–0.15×T×M
+IfEnd
+Next
+List 9[10]→I
+If I>0:Then
+List 1[I]→J:List 2[I]→K:3×E→L
+F-Line J–L,K–L,J+L,K–L:F-Line J+L,K–L,J+L,K+L:F-Line J+L,K+L,J–L,K+L:F-Line J–L,K+L,J–L,K–L
+IfEnd
+Text 51,1,"ESTRUCTURA"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+IfEnd
+If List 9[19]=7:Then
+List 9[1]→N:List 9[2]→P:List 9[3]→Q:List 9[4]→D
+0→Z:0→H
+If N<3:Then 1→Z:IfEnd
+If Z=0:Then
+If P=0:Then 2→Z:IfEnd
+If Q=0:Then 3→Z:IfEnd
+IfEnd
+If Z=0:Then
+2×N–3→B
+For 1→K To B
+If List 3[K]=0:Then 4→Z:K→H:IfEnd
+If List 4[K]=0:Then 4→Z:K→H:IfEnd
+Next
+IfEnd
+If Z=0:Then
+For 1→K To N
+0→I
+For 1→J To B
+If List 3[J]=K:Then 1→I:IfEnd
+If List 4[J]=K:Then 1→I:IfEnd
+Next
+If I=0:Then 5→Z:K→H:IfEnd
+Next
+IfEnd
+If Z>0:Then
+ClrText
+Locate 1,1,"NO SE PUEDE RESOLVER"
+If Z=1:Then Locate 1,3,"FALTAN NUDOS (3 A 6)":IfEnd
+If Z=2:Then Locate 1,3,"FALTA EL APOYO FIJO":Locate 1,4,"VER APOYOS":IfEnd
+If Z=3:Then Locate 1,3,"FALTA EL RODILLO":Locate 1,4,"VER APOYOS":IfEnd
+If Z=4:Then Locate 1,3,"BARRA SIN DEFINIR:":Locate 19,3,H:Locate 1,4,"VER BARRAS":IfEnd
+If Z=5:Then Locate 1,3,"NUDO SIN BARRAS:":Locate 17,3,H:Locate 1,4,"VER BARRAS":IfEnd
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If Z=0:Then
+2×N→M
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}→List 7
+{0,0,0,0,0,0,0,0,0,0,0,0}→List 8
+For 1→K To B
+List 3[K]→I:List 4[K]→J
+List 1[J]–List 1[I]→X:List 2[J]–List 2[I]→Y
+√(X×X+Y×Y)→L
+If L>0:Then X÷L→X:Y÷L→Y:IfEnd
+List 7[(2×I–2)×13+K]+X→List 7[(2×I–2)×13+K]
+List 7[(2×I–1)×13+K]+Y→List 7[(2×I–1)×13+K]
+List 7[(2×J–2)×13+K]–X→List 7[(2×J–2)×13+K]
+List 7[(2×J–1)×13+K]–Y→List 7[(2×J–1)×13+K]
+Next
+1→List 7[(2×P–2)×13+B+1]
+1→List 7[(2×P–1)×13+B+2]
+If D=2:Then 1→List 7[(2×Q–2)×13+B+3]:IfEnd
+If D=1:Then 1→List 7[(2×Q–1)×13+B+3]:IfEnd
+For 1→K To N
+–List 5[K]→List 7[(2×K–2)×13+13]
+–List 6[K]→List 7[(2×K–1)×13+13]
+Next
+For 1→K To M
+K→S:Abs (List 7[(K–1)×13+K])→T
+If K<M:Then
+For K+1→I To M
+If Abs (List 7[(I–1)×13+K])>T:Then I→S:Abs (List 7[(I–1)×13+K])→T:IfEnd
+Next
+IfEnd
+If T<0.000001:Then 1→Z:IfEnd
+If Z=0:Then
+If S>K:Then
+For 1→J To 13
+List 7[(K–1)×13+J]→X
+List 7[(S–1)×13+J]→List 7[(K–1)×13+J]
+X→List 7[(S–1)×13+J]
+Next
+IfEnd
+If K<M:Then
+For K+1→I To M
+List 7[(I–1)×13+K]÷List 7[(K–1)×13+K]→X
+For K→J To 13
+List 7[(I–1)×13+J]–X×List 7[(K–1)×13+J]→List 7[(I–1)×13+J]
+Next
+Next
+IfEnd
+IfEnd
+Next
+If Z=1:Then
+ClrText
+Locate 1,1,"ESTRUCTURA INESTABLE"
+Locate 1,2,"O MAL DEFINIDA"
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+If Z=0:Then
+For 1→J To M
+M+1–J→K
+List 7[(K–1)×13+13]→X
+If K<M:Then
+For K+1→I To M
+X–List 7[(K–1)×13+I]×List 8[I]→X
+Next
+IfEnd
+X÷List 7[(K–1)×13+K]→List 8[K]
+Next
+For 1→K To M
+If Abs (List 8[K])<0.0001:Then 0→List 8[K]:IfEnd
+Next
+0→G:0→H:0→X:0→Y
+For 1→K To B
+If List 8[K]>X:Then List 8[K]→X:K→G:IfEnd
+If List 8[K]<Y:Then List 8[K]→Y:K→H:IfEnd
+Next
+ClrText
+Locate 1,1,"BARRA  N KG    T/C"
+2→R
+For 1→K To B
+Locate 1,R,K:Locate 4,R,List 8[K]
+If List 8[K]>0:Then Locate 17,R,"T":IfEnd
+If List 8[K]<0:Then Locate 17,R,"C":IfEnd
+If List 8[K]=0:Then Locate 17,R,"0":IfEnd
+If K=G:Then Locate 20,R,"*":IfEnd
+If K=H:Then Locate 20,R,"*":IfEnd
+R+1→R
+If R=8:Then
+If K<B:Then
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+ClrText
+Locate 1,1,"BARRA  N KG    T/C"
+2→R
+IfEnd
+IfEnd
+Next
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+ClrText
+Locate 1,1,"BARRAS CRITICAS (*)"
+If G>0:Then
+Locate 1,2,"MAX TRACCION BARRA":Locate 20,2,G
+Locate 1,3,"N =":Locate 5,3,X
+IfEnd
+If H>0:Then
+List 3[H]→I:List 4[H]→J
+√((List 1[J]–List 1[I])×(List 1[J]–List 1[I])+(List 2[J]–List 2[I])×(List 2[J]–List 2[I]))→L
+Locate 1,5,"MAX COMPRES. BARRA":Locate 20,5,H
+Locate 1,6,"N =":Locate 5,6,Y
+Locate 1,7,"LARGO M =":Locate 11,7,L
+IfEnd
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+ClrText
+Locate 1,1,"REACCIONES KG"
+Locate 1,2,"NUDO":Locate 6,2,P:Locate 9,2,"RX":Locate 12,2,List 8[B+1]
+Locate 9,3,"RY":Locate 12,3,List 8[B+2]
+Locate 1,4,"NUDO":Locate 6,4,Q
+If D=2:Then Locate 9,4,"RX":IfEnd
+If D=1:Then Locate 9,4,"RY":IfEnd
+Locate 12,4,List 8[B+3]
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
+IfEnd
+IfEnd
+WhileEnd

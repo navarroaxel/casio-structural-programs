@@ -1,0 +1,115 @@
+{100,120,140,160,180,200,220,240,260,280,300,320,340,360,400,450,500,550,600,650,700,800,900,1000}→List 1
+{89.9,144,216,311,426,570,736,938,1150,1380,1680,1930,2160,2400,2880,3550,4290,4970,5700,6480,7340,8980,10980,12890}→List 2
+{20.41,26.69,33.76,42.63,51.26,61.31,71.44,83.21,92.63,102.84,116.97,126.39,134.24,142.09,155.43,171.13,187.62,199.39,211.95,224.51,240.21,262.19,291.24,314}→List 3
+"LUZ VIGA M"?→L
+"LARGO CABLE M"?→C
+"CARGAS PUNTUALES"?→N
+If N>0:Then
+For 1→J To N
+"DIST DESDE CABLE M"?→X:X→List 4[J]
+"P KG"?→Y:Y→List 5[J]
+Next
+IfEnd
+"Q KG/M"?→Q
+"SIGMA ADM (0=1600)"?→S
+If S=0:Then 1600→S:IfEnd
+Q×L÷2→R:0→B
+If N>0:Then
+For 1→J To N
+R+List 5[J]×(L–List 4[J])÷L→R:B+List 5[J]→B
+Next
+IfEnd
+0→M:0→G
+For 0→K To 200+N
+K×L÷200→X
+If K>200:Then List 4[K–200]→X:IfEnd
+R×X–Q×X×X÷2→Y
+If N>0:Then
+For 1→J To N
+If List 4[J]<X:Then Y–List 5[J]×(X–List 4[J])→Y:IfEnd
+Next
+IfEnd
+If Y>M:Then Y→M:X→G:IfEnd
+Next
+If Q>0:Then
+0→V
+If N>0:Then
+For 1→J To N
+If List 4[J]<G:Then V+List 5[J]→V:IfEnd
+Next
+IfEnd
+(R–V)÷Q→X
+0→Z
+If N>0:Then
+For 1→J To N
+If List 4[J]<X:Then Z+List 5[J]→Z:IfEnd
+Next
+IfEnd
+If X>0:Then
+If X<L:Then
+If Z=V:Then
+R×X–Q×X×X÷2→Y
+If N>0:Then
+For 1→J To N
+If List 4[J]<X:Then Y–List 5[J]×(X–List 4[J])→Y:IfEnd
+Next
+IfEnd
+If Y>M:Then Y→M:IfEnd
+IfEnd
+IfEnd
+IfEnd
+IfEnd
+M×100÷S→W
+0→K
+For 1→I To 24
+If K=0:Then
+If W≤List 2[I]:Then I→K:IfEnd
+IfEnd
+Next
+"Mₘₐₓ KG M"
+M◢
+"SX NEC CM3"
+W◢
+0→Z
+If K=0:Then
+"NINGUN IPB HASTA 1000"
+IfEnd
+If K>0:Then
+List 3[K]→Z
+"IPBₘᵢₙ"
+List 1[K]◢
+"SIGMA CON IPBₘᵢₙ"
+M×100÷List 2[K]◢
+IfEnd
+R+Z×L÷2→T
+"TENSION CABLE KG"
+T◢
+T÷S→A
+"A CABLE CM2"
+A◢
+"D CABLE CM"
+√(4×A÷3.14159265)◢
+"ALARG CABLE CM"
+S×C×100÷2100000◢
+"V PIN KG"
+B+Q×L+Z×L–T◢
+If M>0:Then
+Cls
+ViewWindow 0,L,L÷4,–1.25×M,0.35×M,M
+Horizontal 0
+0→X:0→Y
+For 1→I To 40
+I×L÷40→B
+R×B–Q×B×B÷2→E
+If N>0:Then
+For 1→J To N
+If List 4[J]<B:Then E–List 5[J]×(B–List 4[J])→E:IfEnd
+Next
+IfEnd
+F-Line X,–Y,B,–E
+B→X:E→Y
+Next
+Text 1,1,M
+While Getkey>0:WhileEnd
+While Getkey=0:WhileEnd
+IfEnd
