@@ -84,3 +84,7 @@ If something misbehaves on the device, please open an issue with the program nam
 ## Origin
 
 Extracted from the [Sagitta](https://github.com/navarroaxel/sagitta) frame-diagram simulator, where the programs were developed together with a study page and the section-cut guide.
+
+## License
+
+[MIT](LICENSE). The files under `src/lib/` that come from Sagitta are the same author's and carry the same license.
