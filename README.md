@@ -11,7 +11,7 @@ The programs were written for a university course (Estabilidad / structural stab
 | Program | What it does |
 | --- | --- |
 | **REACC** | Support reactions of a statically determinate **3D frame** fixed at A, from its loads (point forces, distributed loads, moments). Loads persist between runs (lists 11–21). Menu: add loads, list / delete loads, reactions, section cut at the base of a vertical column (N, Qx, Qy, Mx, My in the local triad). |
-| **SECCION** | Lightest **IPB 100…600** whose max σ ≤ σ_adm for given N, Mx, My. Picks the face (strong axis against the larger moment), gives the neutral axis intercepts and draws the section, σ at the four corners, the critical corner, the σ(Mx) and σ(My) bow-ties and the **resultant (oblique) diagram**. A menu lets you see every view again. |
+| **SECC** (SECCION) | Lightest **IPB 100…600** whose max σ ≤ σ_adm for given N, Mx, My. Picks the face (strong axis against the larger moment), gives the neutral axis intercepts and draws the section, σ at the four corners, the critical corner, the σ(Mx) and σ(My) bow-ties and the **resultant (oblique) diagram**. A menu lets you see every view again. |
 | **VIGACAB** | Horizontal beam held by a vertical **cable** at one end and pinned at the other, with any number of point loads plus a uniform load. Mmax, lightest IPB by Sx, the cable's tension / area / diameter / elongation, and the moment diagram. |
 | **TRACCION** | A truss bar in **tension**: A ≥ N/σ_adm, lightest IPB by area. |
 | **PANDEO** | A truss bar in **compression**: I_min = P·(βL)²/(π²E) (Euler, weak axis), lightest IPB with Iy ≥ I_min, its P_cr and a warning when σ = P/A exceeds σ_adm. |

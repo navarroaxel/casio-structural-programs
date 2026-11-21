@@ -631,7 +631,7 @@ const DATA_VIEW = [
 import { IPB_PROFILES, IPN_PROFILES } from "./profiles";
 import { guideSection, neutralIntercepts, plane } from "./sectionGuide";
 
-export const SECCION_NAME = "SECCION";
+export const SECCION_NAME = "SECC";
 export const SECCION_TABLE = IPB_PROFILES.filter((p) => p.h <= 600);
 
 export interface IPBChoice {
