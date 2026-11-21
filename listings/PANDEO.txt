@@ -16,7 +16,7 @@ If K=0:Then
 If M≤List 3[I]:Then I→K:IfEnd
 IfEnd
 Next
-"Iₘᵢₙ CM4 EULER"
+"IMIN CM4 EULER"
 M◢
 If K=0:Then
 "NINGUN IPB HASTA 1000"

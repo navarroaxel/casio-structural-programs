@@ -69,7 +69,7 @@ Checked:
 
 - The Basic syntax itself was only checked against chapter 8 of the manual.
 - Graphics commands (`Cls`, `ViewWindow`, `F-Line`, `PlotOn`, `Circle`, `Text`, `Horizontal`, `Vertical`) and `Intg` are not in the four real files used to check the container.
-- The subscript letters (`ₐ ₘ ₓ ᵢ ₙ`, "Mini Latin" `E7xx`) and superscript digits (`E5Cx`) in strings.
+- Superscript digits (`E5Cx`) in strings. (Subscript letters, "Mini Latin" `E7xx`, were removed: a file using them vanished from the calculator after copying.)
 - `◄ ►` key codes: `▲ ▼ EXE` and the number keys are confirmed on a calculator, the horizontal arrows are taken from the manual. RETIC is the program that uses them.
 
 If something misbehaves on the device, please open an issue with the program name, the screen, and what you pressed.

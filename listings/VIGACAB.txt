@@ -66,7 +66,7 @@ If K=0:Then
 If W≤List 2[I]:Then I→K:IfEnd
 IfEnd
 Next
-"Mₘₐₓ KG M"
+"MMAX KG M"
 M◢
 "SX NEC CM3"
 W◢
@@ -76,9 +76,9 @@ If K=0:Then
 IfEnd
 If K>0:Then
 List 3[K]→Z
-"IPBₘᵢₙ"
+"IPBMIN"
 List 1[K]◢
-"SIGMA CON IPBₘᵢₙ"
+"SIGMA CON IPBMIN"
 M×100÷List 2[K]◢
 IfEnd
 R+Z×L÷2→T
